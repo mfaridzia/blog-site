@@ -1,0 +1,50 @@
+---
+import type { Lang } from '../i18n/utils';
+
+interface Props {
+  currentLang: Lang;
+}
+
+const { currentLang } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+// Helper to calculate target path for switching
+let idPath = '/';
+let enPath = '/en';
+
+if (currentLang === 'id') {
+  idPath = currentPath;
+  enPath = currentPath === '/' ? '/en' : `/en${currentPath}`;
+} else {
+  enPath = currentPath;
+  const stripped = currentPath.replace(/^\/en/, '') || '/';
+  idPath = stripped;
+}
+---
+
+<div class="inline-flex items-center rounded-lg bg-slate-200/60 dark:bg-slate-800/80 p-0.5 text-xs font-medium text-slate-600 dark:text-slate-400">
+  <a
+    href={idPath}
+    class:list={[
+      'px-2 py-1 rounded-md transition-all',
+      currentLang === 'id'
+        ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
+        : 'hover:text-slate-900 dark:hover:text-white'
+    ]}
+    aria-label="Bahasa Indonesia"
+  >
+    ID
+  </a>
+  <a
+    href={enPath}
+    class:list={[
+      'px-2 py-1 rounded-md transition-all',
+      currentLang === 'en'
+        ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs font-semibold'
+        : 'hover:text-slate-900 dark:hover:text-white'
+    ]}
+    aria-label="English"
+  >
+    EN
+  </a>
+</div>

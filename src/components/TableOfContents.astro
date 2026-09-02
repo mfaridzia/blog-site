@@ -1,0 +1,82 @@
+---
+import type { MarkdownHeading } from 'astro';
+import type { Lang } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  headings: MarkdownHeading[];
+  lang: Lang;
+}
+
+const { headings, lang } = Astro.props;
+const t = useTranslations(lang);
+const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+{filteredHeadings.length > 0 && (
+  <nav class="toc-container sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto space-y-3 text-xs" aria-label="Table of contents">
+    <p class="font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+      {t('post.toc')}
+    </p>
+
+    <ul class="space-y-2 border-l border-slate-200 dark:border-slate-800">
+      {filteredHeadings.map((heading) => (
+        <li class:list={['toc-item', heading.depth === 3 ? 'pl-4' : 'pl-2.5']}>
+          <a
+            href={`#${heading.slug}`}
+            class="toc-link block py-0.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors line-clamp-1 border-l -ml-[1px] border-transparent hover:border-slate-400"
+            data-slug={heading.slug}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script>
+  function setupTocScrollspy() {
+    const links = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+    if (!links.length) return;
+
+    const headingElements = Array.from(links)
+      .map((link) => {
+        const slug = link.dataset.slug;
+        return slug ? document.getElementById(slug) : null;
+      })
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (!headingElements.length) return;
+
+    function updateActive() {
+      const scrollY = window.scrollY;
+      let activeIndex = 0;
+
+      for (let i = 0; i < headingElements.length; i++) {
+        const heading = headingElements[i];
+        if (heading.offsetTop - 120 <= scrollY) {
+          activeIndex = i;
+        } else {
+          break;
+        }
+      }
+
+      links.forEach((link, idx) => {
+        if (idx === activeIndex) {
+          link.classList.add('text-blue-600', 'dark:text-blue-400', 'font-semibold', 'border-blue-600', 'dark:border-blue-400');
+          link.classList.remove('text-slate-600', 'dark:text-slate-400', 'border-transparent');
+        } else {
+          link.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-semibold', 'border-blue-600', 'dark:border-blue-400');
+          link.classList.add('text-slate-600', 'dark:text-slate-400', 'border-transparent');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+  }
+
+  setupTocScrollspy();
+  document.addEventListener('astro:after-swap', setupTocScrollspy);
+</script>

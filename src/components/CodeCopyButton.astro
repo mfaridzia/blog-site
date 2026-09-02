@@ -1,0 +1,50 @@
+---
+import type { Lang } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<script define:vars={{ copyText: t('post.copy'), copiedText: t('post.copied') }}>
+  function setupCodeCopyButtons() {
+    const codeBlocks = document.querySelectorAll('.prose pre');
+
+    codeBlocks.forEach((pre) => {
+      // Check if copy button already exists
+      if (pre.querySelector('.code-copy-btn')) return;
+
+      // Position relative for absolute button positioning
+      pre.classList.add('relative', 'group');
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'code-copy-btn absolute top-3 right-3 px-2 py-1 text-[11px] font-mono rounded-md bg-slate-200/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity border border-slate-300 dark:border-slate-700 hover:bg-slate-300 dark:hover:bg-slate-700 cursor-pointer shadow-xs';
+      btn.textContent = copyText;
+
+      btn.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.innerText || pre.innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          btn.textContent = copiedText;
+          btn.classList.add('text-emerald-600', 'dark:text-emerald-400');
+          setTimeout(() => {
+            btn.textContent = copyText;
+            btn.classList.remove('text-emerald-600', 'dark:text-emerald-400');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy', err);
+        }
+      });
+
+      pre.appendChild(btn);
+    });
+  }
+
+  setupCodeCopyButtons();
+  document.addEventListener('astro:after-swap', setupCodeCopyButtons);
+</script>

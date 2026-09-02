@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site.config';
+import Icon from '../../components/Icon.astro';
+
+const lang = 'en';
+---
+
+<BaseLayout
+  title="About Me"
+  description="Background, engineering judgment, and technical interests."
+  lang={lang}
+>
+  <div class="py-6 space-y-10 max-w-3xl">
+    <!-- Back to Archive -->
+    <div>
+      <a
+        href="/en"
+        class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+      >
+        <Icon name="arrow-left" class="w-3.5 h-3.5" />
+        <span>Back to Home</span>
+      </a>
+    </div>
+
+    <!-- Header Section -->
+    <header class="space-y-4">
+      <div class="flex items-center gap-4">
+        <img
+          src={siteConfig.avatar}
+          alt={siteConfig.author}
+          class="w-16 h-16 rounded-full object-cover border-2 border-slate-200 dark:border-slate-700"
+          width="64"
+          height="64"
+        />
+        <div>
+          <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            {siteConfig.author}
+          </h1>
+          <p class="text-sm font-medium text-slate-500 dark:text-slate-400">
+            Software Engineer & Writer
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Prose -->
+    <div class="prose prose-slate dark:prose-invert max-w-none space-y-6">
+      <p class="text-base leading-relaxed">
+        Hi! I'm Farid, a <strong>Software Engineer</strong> focused on modern web architectures, AI agent workflows, and building reliable, high-performance software people love to use.
+      </p>
+
+      <h2>Engineering Principles</h2>
+      <p>
+        I believe that durable software emerges from clarity, uncompromising speed, and deep user empathy:
+      </p>
+      <ul>
+        <li><strong>Speed & Zero Bloat:</strong> Prioritize instant rendering, minimal client bundles, and content-first architectures.</li>
+        <li><strong>System Resilience:</strong> Meaningful test automation, strict state isolation, and production observability.</li>
+        <li><strong>AI as a Capability Multiplier:</strong> Designing deterministic agent loops with strict guardrails to eliminate cognitive toil.</li>
+      </ul>
+
+      <h2>Toolkit & Stack</h2>
+      <p>
+        Technologies and tools I work with daily:
+      </p>
+      <ul>
+        <li><strong>Frontend:</strong> TypeScript, Astro, React, Next.js, Vue, Tailwind CSS</li>
+        <li><strong>Backend & Cloud:</strong> Node.js, Go, PostgreSQL, Redis, Cloudflare Workers, Docker</li>
+        <li><strong>AI & Automation:</strong> Agent Loops, LLM Tool Calling, GitHub Actions CI/CD</li>
+      </ul>
+
+      <h2>Connect</h2>
+      <p>
+        Feel free to reach out for collaborations, discussions, or just to say hello:
+      </p>
+      <div class="not-prose flex flex-wrap gap-4 pt-2">
+        {siteConfig.socials.map((s) => {
+          let iconName = 'mail';
+          if (s.name === 'GitHub') iconName = 'github';
+          if (s.name === 'LinkedIn') iconName = 'linkedin';
+          if (s.name.includes('Twitter') || s.name.includes('X')) iconName = 'x';
+
+          return (
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noreferrer"
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-600 bg-white dark:bg-slate-900/60 transition-colors"
+            >
+              <Icon name={iconName} class="w-3.5 h-3.5" />
+              <span>{s.name}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

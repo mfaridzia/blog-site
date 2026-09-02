@@ -1,0 +1,109 @@
+---
+import { siteConfig } from '../config/site.config';
+import type { Lang } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  totalPosts: number;
+}
+
+const { lang, totalPosts } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <h2 id="archive" class="text-xl font-bold tracking-tight text-slate-900 dark:text-white scroll-mt-24">
+      {t('archive.title')}
+    </h2>
+    <span id="posts-count-label" class="text-xs font-medium text-slate-500 dark:text-slate-400">
+      {totalPosts} {t('archive.postsCount')}
+    </span>
+  </div>
+
+  <!-- Topic Pills -->
+  <div
+    class="flex flex-wrap items-center gap-2"
+    role="radiogroup"
+    aria-label={t('filter.label')}
+  >
+    {siteConfig.topics.map((topic, index) => (
+      <button
+        type="button"
+        data-topic={topic.id}
+        class:list={[
+          'topic-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-slate-400',
+          index === 0
+            ? 'active-topic bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs font-semibold'
+            : 'bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600'
+        ]}
+      >
+        {topic.label[lang]}
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  function setupTopicFilter() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.topic-btn');
+    const posts = document.querySelectorAll<HTMLElement>('.post-item');
+    const countLabel = document.getElementById('posts-count-label');
+    if (!buttons.length || !posts.length) return;
+
+    function applyFilter(selectedTopic: string) {
+      let visibleCount = 0;
+
+      buttons.forEach((btn) => {
+        const isSelected = btn.dataset.topic === selectedTopic;
+        if (isSelected) {
+          btn.className = 'topic-btn active-topic px-3 py-1.5 rounded-lg text-xs font-semibold transition-all bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs cursor-pointer';
+        } else {
+          btn.className = 'topic-btn px-3 py-1.5 rounded-lg text-xs font-medium transition-all bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 cursor-pointer';
+        }
+      });
+
+      posts.forEach((post) => {
+        const topics = (post.dataset.topics || '').split(',').map((t) => t.trim().toLowerCase());
+        if (selectedTopic === 'all' || topics.includes(selectedTopic.toLowerCase())) {
+          post.style.display = '';
+          visibleCount++;
+        } else {
+          post.style.display = 'none';
+        }
+      });
+
+      if (countLabel) {
+        const unit = countLabel.textContent?.includes('artikel') ? 'artikel' : 'posts';
+        countLabel.textContent = `${visibleCount} ${unit}`;
+      }
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const topic = btn.dataset.topic || 'all';
+        applyFilter(topic);
+
+        // Update URL query without page reload
+        const url = new URL(window.location.href);
+        if (topic === 'all') {
+          url.searchParams.delete('topic');
+        } else {
+          url.searchParams.set('topic', topic);
+        }
+        window.history.replaceState({}, '', url.toString());
+      });
+    });
+
+    // Check URL search params on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTopic = urlParams.get('topic');
+    if (initialTopic) {
+      applyFilter(initialTopic.toLowerCase());
+    }
+  }
+
+  setupTopicFilter();
+  document.addEventListener('astro:after-swap', setupTopicFilter);
+</script>

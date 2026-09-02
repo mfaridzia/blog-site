@@ -1,0 +1,67 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Lang } from '../i18n/utils';
+import { formatDate, formatUrl } from '../i18n/utils';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  lang: Lang;
+}
+
+const { post, lang } = Astro.props;
+const slug = post.id.replace(/^(id|en)\//, '').replace(/\.(md|mdx)$/, '');
+const postUrl = formatUrl(`/posts/${slug}`, lang);
+const topicsString = post.data.topics.join(' / ');
+const topicsData = post.data.topics.map(t => t.toLowerCase()).join(',');
+---
+
+<article
+  class="post-item group border-b border-slate-200/60 dark:border-slate-800/60 py-8 last:border-b-0"
+  data-topics={topicsData}
+>
+  <a
+    href={postUrl}
+    class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-6"
+  >
+    <!-- Post Content -->
+    <div class="flex-1 space-y-2">
+      <!-- Meta (Date + Topics) -->
+      <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {formatDate(post.data.pubDate, lang)}
+        </time>
+        {topicsString && (
+          <>
+            <span>•</span>
+            <span class="font-medium text-slate-700 dark:text-slate-300">
+              {topicsString}
+            </span>
+          </>
+        )}
+      </div>
+
+      <!-- Title -->
+      <h3 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        {post.data.title}
+      </h3>
+
+      <!-- Excerpt -->
+      <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+        {post.data.description}
+      </p>
+    </div>
+
+    <!-- Thumbnail Image -->
+    {post.data.cover && (
+      <div class="w-full md:w-56 h-36 shrink-0 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-800">
+        <img
+          src={post.data.cover}
+          alt={post.data.coverAlt || post.data.title}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )}
+  </a>
+</article>
