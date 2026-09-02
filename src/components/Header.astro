@@ -19,23 +19,23 @@ const rssUrl = lang === 'id' ? '/id/rss.xml' : '/en/rss.xml';
 ---
 
 <header class="sticky top-0 z-40 w-full border-b border-[var(--line)] bg-[var(--paper)]/95 backdrop-blur-md transition-colors">
-  <div class="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 h-18 flex items-center justify-between">
-    <!-- Brand matching labs.muhfaridzia.live -->
-    <a href={formatUrl('/', lang)} class="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-[var(--green)] rounded-lg">
+  <div class="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 h-16 sm:h-18 flex items-center justify-between gap-2">
+    <!-- Brand -->
+    <a href={formatUrl('/', lang)} class="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-2 focus-visible:outline-[var(--green)] rounded-lg min-w-0">
       <img
         src={siteConfig.avatar}
         alt={siteConfig.author}
-        class="w-10 h-10 rounded-full object-cover border border-[var(--line)] group-hover:scale-105 transition-transform"
+        class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-[var(--line)] group-hover:scale-105 transition-transform shrink-0"
         width="40"
         height="40"
       />
-      <span class="font-semibold text-[var(--ink)] tracking-tight text-lg group-hover:text-[var(--green)] transition-colors">
+      <span class="font-semibold text-[var(--ink)] tracking-tight text-sm sm:text-base md:text-lg group-hover:text-[var(--green)] transition-colors truncate max-w-[140px] xs:max-w-[200px] sm:max-w-none">
         {title}
       </span>
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[var(--ink-soft)]">
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[var(--ink-soft)] shrink-0">
       <a href={archiveUrl} class="hover:text-[var(--green)] transition-colors">
         {t('nav.archive')}
       </a>
@@ -67,43 +67,43 @@ const rssUrl = lang === 'id' ? '/id/rss.xml' : '/en/rss.xml';
     </nav>
 
     <!-- Mobile Controls -->
-    <div class="flex items-center gap-2 md:hidden">
+    <div class="flex items-center gap-1.5 sm:gap-2 md:hidden shrink-0">
       <button
         type="button"
         id="search-trigger-mobile"
-        class="p-2 rounded-full text-[var(--ink-soft)] hover:text-[var(--green)] border border-[var(--line)] bg-[var(--card)] cursor-pointer"
+        class="w-8 h-8 flex items-center justify-center rounded-full text-[var(--ink-soft)] hover:text-[var(--green)] border border-[var(--line)] bg-[var(--card)] cursor-pointer"
         aria-label={t('search.button')}
       >
-        <Icon name="search" class="w-4 h-4" />
+        <Icon name="search" class="w-3.5 h-3.5" />
       </button>
       <LanguageSwitcher currentLang={lang} />
       <ThemeToggle />
       <button
         type="button"
         id="mobile-menu-btn"
-        class="p-2 rounded-full text-[var(--ink-soft)] hover:text-[var(--green)] border border-[var(--line)] bg-[var(--card)] cursor-pointer"
+        class="w-8 h-8 flex items-center justify-center rounded-full text-[var(--ink-soft)] hover:text-[var(--green)] border border-[var(--line)] bg-[var(--card)] cursor-pointer"
         aria-label="Toggle navigation menu"
         aria-expanded="false"
       >
         <span id="mobile-menu-icon-open">
-          <Icon name="menu" class="w-4 h-4" />
+          <Icon name="menu" class="w-3.5 h-3.5" />
         </span>
         <span id="mobile-menu-icon-close" class="hidden">
-          <Icon name="close" class="w-4 h-4" />
+          <Icon name="close" class="w-3.5 h-3.5" />
         </span>
       </button>
     </div>
   </div>
 
   <!-- Mobile Dropdown Menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-b border-[var(--line)] bg-[var(--paper)] px-6 py-4 space-y-3 text-sm font-medium">
-    <a href={archiveUrl} class="block py-1.5 text-[var(--ink-soft)] hover:text-[var(--green)]">
+  <div id="mobile-menu" class="hidden md:hidden border-b border-[var(--line)] bg-[var(--paper)] px-4 sm:px-6 py-4 space-y-3 text-sm font-medium">
+    <a href={archiveUrl} class="block py-2 text-[var(--ink-soft)] hover:text-[var(--green)] border-b border-[var(--line)]/40">
       {t('nav.archive')}
     </a>
-    <a href={aboutUrl} class="block py-1.5 text-[var(--ink-soft)] hover:text-[var(--green)]">
+    <a href={aboutUrl} class="block py-2 text-[var(--ink-soft)] hover:text-[var(--green)] border-b border-[var(--line)]/40">
       {t('nav.about')}
     </a>
-    <a href={rssUrl} target="_blank" class="flex items-center gap-2 py-1.5 text-[var(--ink-soft)] hover:text-[var(--green)]">
+    <a href={rssUrl} target="_blank" class="flex items-center gap-2 py-2 text-[var(--ink-soft)] hover:text-[var(--green)]">
       <Icon name="rss" class="w-4 h-4" />
       <span>{t('nav.rss')} Feed</span>
     </a>

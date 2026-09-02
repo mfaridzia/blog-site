@@ -29,24 +29,24 @@ const searchIndex = posts.map((post) => {
 
 <div
   id="search-modal"
-  class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-start justify-center pt-20 px-4 transition-opacity"
+  class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-start justify-center pt-4 sm:pt-20 px-3 sm:px-4 transition-opacity"
   role="dialog"
   aria-modal="true"
   aria-label={t('search.placeholder')}
 >
   <div
-    class="w-full max-w-xl bg-[var(--card)] text-[var(--ink)] rounded-lg border border-[var(--line)] shadow-2xl overflow-hidden"
+    class="w-full max-w-xl bg-[var(--card)] text-[var(--ink)] rounded-xl border border-[var(--line)] shadow-2xl overflow-hidden mt-2 sm:mt-0"
     id="search-modal-container"
   >
     <!-- Search Input Header -->
-    <div class="flex items-center px-4 border-b border-[var(--line)]">
-      <span class="text-[var(--muted)] shrink-0 mr-3">
-        <Icon name="search" class="w-5 h-5" />
+    <div class="flex items-center px-3 sm:px-4 border-b border-[var(--line)]">
+      <span class="text-[var(--muted)] shrink-0 mr-2 sm:mr-3">
+        <Icon name="search" class="w-4 h-4 sm:w-5 sm:h-5" />
       </span>
       <input
         type="text"
         id="search-input"
-        class="w-full py-4 text-base bg-transparent text-[var(--ink)] placeholder-[var(--muted)] focus:outline-hidden"
+        class="w-full py-3.5 sm:py-4 text-sm sm:text-base bg-transparent text-[var(--ink)] placeholder-[var(--muted)] focus:outline-hidden"
         placeholder={t('search.placeholder')}
         autocomplete="off"
         spellcheck="false"
@@ -54,7 +54,7 @@ const searchIndex = posts.map((post) => {
       <button
         type="button"
         id="search-close-btn"
-        class="p-1.5 rounded-full text-[var(--muted)] hover:text-[var(--green)] cursor-pointer"
+        class="p-1 sm:p-1.5 rounded-full text-[var(--muted)] hover:text-[var(--green)] cursor-pointer"
         aria-label={t('search.close')}
       >
         <Icon name="close" class="w-4 h-4" />
@@ -62,14 +62,14 @@ const searchIndex = posts.map((post) => {
     </div>
 
     <!-- Search Results Container -->
-    <div id="search-results" class="max-h-80 overflow-y-auto p-2 divide-y divide-[var(--line)]/50">
+    <div id="search-results" class="max-h-[60vh] sm:max-h-80 overflow-y-auto p-2 divide-y divide-[var(--line)]/50">
       <!-- Dynamically populated -->
     </div>
 
     <!-- Modal Footer Helper -->
-    <div class="px-4 py-2.5 bg-[var(--paper-deep)] border-t border-[var(--line)] flex items-center justify-between font-mono text-[11px] text-[var(--muted)]">
+    <div class="px-3 sm:px-4 py-2 sm:py-2.5 bg-[var(--paper-deep)] border-t border-[var(--line)] flex items-center justify-between font-mono text-[10px] sm:text-[11px] text-[var(--muted)]">
       <div class="flex items-center gap-2">
-        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↑</kbd><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↓</kbd> Navigasi</span>
+        <span class="hidden sm:inline-flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↑</kbd><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↓</kbd> Navigasi</span>
         <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↵</kbd> Buka</span>
       </div>
       <span><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">ESC</kbd> Tutup</span>

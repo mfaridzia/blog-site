@@ -16,16 +16,16 @@ const topicsData = post.data.topics.map(t => t.toLowerCase()).join(',');
 ---
 
 <article
-  class="post-item group border-b border-[var(--line)] py-6 sm:py-8 last:border-b-0"
+  class="post-item group border-b border-[var(--line)] py-6 sm:py-8 last:border-b-0 min-w-0"
   data-topics={topicsData}
 >
   <a
     href={postUrl}
-    class="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(160px,240px)] items-center gap-6"
+    class="flex flex-col-reverse sm:grid sm:grid-cols-[minmax(0,1fr)_minmax(140px,220px)] items-start sm:items-center gap-4 sm:gap-6 min-w-0"
   >
     <!-- Post Text Content -->
-    <div class="space-y-2">
-      <div class="flex items-center gap-2 font-mono text-xs text-[var(--muted)]">
+    <div class="space-y-1.5 sm:space-y-2 min-w-0 flex-1">
+      <div class="flex flex-wrap items-center gap-2 font-mono text-xs text-[var(--muted)]">
         <time datetime={post.data.pubDate.toISOString()}>
           {formatDate(post.data.pubDate, lang)}
         </time>
@@ -39,20 +39,20 @@ const topicsData = post.data.topics.map(t => t.toLowerCase()).join(',');
         )}
       </div>
 
-      <!-- Title (Playfair Display) -->
-      <h3 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[var(--ink)] group-hover:text-[var(--green)] transition-colors leading-snug">
+      <!-- Title -->
+      <h3 class="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[var(--ink)] group-hover:text-[var(--green)] transition-colors leading-snug break-words">
         {post.data.title}
       </h3>
 
       <!-- Excerpt -->
-      <p class="text-sm text-[var(--ink-soft)] leading-relaxed line-clamp-2 max-w-2xl">
+      <p class="text-xs sm:text-sm text-[var(--ink-soft)] leading-relaxed line-clamp-2 max-w-2xl break-words">
         {post.data.description}
       </p>
     </div>
 
     <!-- Thumbnail Image -->
     {post.data.cover && (
-      <div class="w-full h-40 md:h-32 shrink-0 rounded-lg overflow-hidden border border-[var(--line)] bg-[var(--paper-deep)]">
+      <div class="w-full sm:w-auto h-44 sm:h-32 shrink-0 rounded-lg overflow-hidden border border-[var(--line)] bg-[var(--paper-deep)]">
         <img
           src={post.data.cover}
           alt={post.data.coverAlt || post.data.title}

@@ -37,6 +37,10 @@
 }
 
 @layer base {
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
   html {
     scroll-behavior: smooth;
     text-size-adjust: 100%;
@@ -44,6 +48,8 @@
     color: var(--ink);
     font-family: var(--font-body);
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    max-width: 100vw;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
@@ -55,6 +61,8 @@
     flex-direction: column;
     margin: 0;
     font-family: var(--font-body);
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   .font-display {
@@ -79,6 +87,15 @@ a {
   color: #17221c;
 }
 
+/* Hide scrollbar for clean horizontal scroll on mobile */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* Shiki dark/light mode code block syntax highlighting */
 html.dark .astro-code,
 html.dark .astro-code span {
@@ -100,8 +117,8 @@ html:not(.dark) .astro-code span {
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -117,7 +134,7 @@ html:not(.dark) .astro-code span {
   background: var(--muted);
 }
 
-/* Prose formatting */
+/* Prose formatting with responsive typography and containment */
 .prose {
   --tw-prose-body: var(--ink-soft);
   --tw-prose-headings: var(--ink);
@@ -133,9 +150,10 @@ html:not(.dark) .astro-code span {
   --tw-prose-code: var(--ink);
   --tw-prose-pre-code: #e8eee9;
   --tw-prose-pre-bg: #141f19;
-  font-size: clamp(1.02rem, 1.2vw, 1.12rem);
-  line-height: 1.78;
+  font-size: clamp(0.96rem, 1.1vw, 1.12rem);
+  line-height: 1.75;
   font-family: var(--font-body);
+  max-width: 100%;
 }
 
 .prose h2,
@@ -145,29 +163,31 @@ html:not(.dark) .astro-code span {
   letter-spacing: -0.03em;
   font-weight: 600;
   color: var(--ink);
+  word-break: break-word;
 }
 
 .prose h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  line-height: 1.2;
-  margin-top: 2.2em;
-  margin-bottom: 0.8em;
-  padding-bottom: 0.4em;
+  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+  line-height: 1.22;
+  margin-top: 2em;
+  margin-bottom: 0.7em;
+  padding-bottom: 0.35em;
   border-bottom: 1px solid var(--line);
 }
 
 .prose h3 {
-  font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
   line-height: 1.3;
-  margin-top: 1.8em;
-  margin-bottom: 0.6em;
+  margin-top: 1.6em;
+  margin-bottom: 0.5em;
 }
 
 .prose p {
   color: var(--ink-soft);
-  margin-top: 1.2em;
-  margin-bottom: 1.2em;
-  line-height: 1.75;
+  margin-top: 1.1em;
+  margin-bottom: 1.1em;
+  line-height: 1.72;
+  word-break: break-word;
 }
 
 .prose a {
@@ -176,6 +196,7 @@ html:not(.dark) .astro-code span {
   text-decoration: underline;
   text-decoration-color: var(--green);
   text-underline-offset: 0.2em;
+  word-break: break-word;
 }
 
 .prose a:hover {
@@ -184,35 +205,49 @@ html:not(.dark) .astro-code span {
 
 .prose pre {
   border: 1px solid var(--line);
-  border-radius: 6px;
-  margin-top: 1.6em;
-  margin-bottom: 1.6em;
-  padding: 1.2em 1.4em;
+  border-radius: 8px;
+  margin-top: 1.4em;
+  margin-bottom: 1.4em;
+  padding: 1em 1.2em;
   background-color: #15221c;
   color: #e8eee9;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .prose code:not(pre code) {
   background-color: var(--paper-deep);
   color: var(--ink);
-  padding: 0.2em 0.45em;
+  padding: 0.15em 0.4em;
   border-radius: 4px;
-  font-size: 0.9em;
+  font-size: 0.88em;
   font-family: var(--font-mono);
+  word-break: break-word;
 }
 
 .prose blockquote {
   border-left: 3px solid var(--green);
-  padding-left: 1.2em;
-  margin-top: 1.6em;
-  margin-bottom: 1.6em;
+  padding-left: 1em;
+  margin-top: 1.4em;
+  margin-bottom: 1.4em;
   font-style: italic;
   color: var(--ink);
 }
 
 .prose img {
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid var(--line);
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: 1.8em;
+  margin-bottom: 1.8em;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
