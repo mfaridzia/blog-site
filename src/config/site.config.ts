@@ -33,7 +33,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  author: "Muh Farid Zia",
+  author: "Muhammad Farid Zia",
   avatar: "https://avatars.githubusercontent.com/u/13011170",
   siteUrl: "https://muhfaridzia.dev",
   title: {

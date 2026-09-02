@@ -1,6 +1,6 @@
 export const languages = {
   id: "Bahasa Indonesia",
-  en: "English"
+  en: "English",
 };
 
 export const defaultLang = "id";
@@ -29,10 +29,11 @@ export const ui = {
     "post.copy": "Salin",
     "post.copied": "Tersalin!",
     "footer.backToTop": "Kembali ke atas",
-    "footer.tagline": "Jurnal & catatan teknis seputar web development dan rekayasa perangkat lunak.",
+    "footer.tagline":
+      "Jurnal & catatan teknis seputar web development dan rekayasa perangkat lunak.",
     "about.title": "Tentang Saya",
     "filter.all": "Semua",
-    "filter.label": "Filter artikel berdasarkan topik"
+    "filter.label": "Filter artikel berdasarkan topik",
   },
   en: {
     "nav.archive": "Articles",
@@ -50,16 +51,17 @@ export const ui = {
     "post.publishedOn": "Published on",
     "post.minRead": "min read",
     "post.by": "By",
-    "post.back": "← All Articles",
+    "post.back": "All Articles",
     "post.toc": "Table of Contents",
     "post.older": "Previous Article",
     "post.newer": "Next Article",
     "post.copy": "Copy",
     "post.copied": "Copied!",
     "footer.backToTop": "Back to top",
-    "footer.tagline": "Personal engineering journal on web technologies and software development.",
+    "footer.tagline":
+      "Personal engineering journal on web technologies and software development.",
     "about.title": "About Me",
     "filter.all": "All",
-    "filter.label": "Filter posts by topic"
-  }
+    "filter.label": "Filter posts by topic",
+  },
 } as const;
