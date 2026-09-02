@@ -34,41 +34,41 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   author: "Muh Farid Zia",
-  avatar: "/images/avatar.jpg",
+  avatar: "https://avatars.githubusercontent.com/u/13011170",
   siteUrl: "https://muhfaridzia.dev",
   title: {
-    id: "Blog by Farid",
-    en: "Blog by Farid"
+    id: "Blog by Muhammad Farid Zia",
+    en: "Blog by Muhammad Farid Zia",
   },
   eyebrow: {
-    id: "Catatan Lapangan",
-    en: "Field notes"
+    id: "Catatan Rekayasa & Web",
+    en: "Software & Web Engineering",
   },
   description: {
-    id: "Catatan praktis seputar rekayasa web, AI agent, arsitektur software, dan pertimbangan teknis.",
-    en: "Field notes on web engineering, AI agent loops, software architecture, and technical judgment."
+    id: "Kumpulan artikel, eksperimen teknis, dan pemikiran seputar web development serta arsitektur software.",
+    en: "Personal writings, technical experiments, and thoughts on modern web development and software engineering.",
   },
   lede: {
-    id: "Software Engineer. Web, AI, dan seni membangun sistem tangguh yang benar-benar berguna.",
-    en: "Software Engineer. Web, AI, and the unglamorous craft of shipping software people actually use."
+    id: "Software Engineer. Berbagi pengalaman teknis, arsitektur web modern, dan eksplorasi teknologi yang relevan.",
+    en: "Software Engineer. Sharing hands-on engineering experiences, modern web practices, and practical tech insights.",
   },
   socials: [
     {
       name: "GitHub",
-      url: "https://github.com/muhfaridzia"
+      url: "https://github.com/mfaridzia",
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/muhfaridzia"
+      url: "https://linkedin.com/in/muhfaridzia",
     },
     {
       name: "X (Twitter)",
-      url: "https://x.com/muhfaridzia"
+      url: "https://x.com/muhfaridzia",
     },
     {
       name: "Email",
-      url: "mailto:farid@example.com"
-    }
+      url: "mailto:muhfaridzia@gmail.com",
+    },
   ],
   topics: [
     { id: "all", label: { id: "Semua", en: "All" } },
@@ -76,6 +76,6 @@ export const siteConfig: SiteConfig = {
     { id: "ai", label: { id: "AI", en: "AI" } },
     { id: "frontend", label: { id: "Frontend", en: "Frontend" } },
     { id: "debugging", label: { id: "Debugging", en: "Debugging" } },
-    { id: "career", label: { id: "Karir", en: "Career" } }
-  ]
+    { id: "career", label: { id: "Karir", en: "Career" } },
+  ],
 };
