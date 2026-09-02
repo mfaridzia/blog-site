@@ -16,44 +16,43 @@ const topicsData = post.data.topics.map(t => t.toLowerCase()).join(',');
 ---
 
 <article
-  class="post-item group border-b border-slate-200/60 dark:border-slate-800/60 py-8 last:border-b-0"
+  class="post-item group border-b border-[var(--line)] py-6 sm:py-8 last:border-b-0"
   data-topics={topicsData}
 >
   <a
     href={postUrl}
-    class="flex flex-col-reverse md:flex-row md:items-center justify-between gap-6"
+    class="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(160px,240px)] items-center gap-6"
   >
-    <!-- Post Content -->
-    <div class="flex-1 space-y-2">
-      <!-- Meta (Date + Topics) -->
-      <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+    <!-- Post Text Content -->
+    <div class="space-y-2">
+      <div class="flex items-center gap-2 text-xs text-[var(--muted)]">
         <time datetime={post.data.pubDate.toISOString()}>
           {formatDate(post.data.pubDate, lang)}
         </time>
         {topicsString && (
           <>
             <span>•</span>
-            <span class="font-medium text-slate-700 dark:text-slate-300">
+            <span class="font-medium text-[var(--moss)]">
               {topicsString}
             </span>
           </>
         )}
       </div>
 
-      <!-- Title -->
-      <h3 class="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+      <!-- Title (Serif Display) -->
+      <h3 class="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--copper)] transition-colors leading-snug">
         {post.data.title}
       </h3>
 
       <!-- Excerpt -->
-      <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+      <p class="text-sm text-[var(--ink-soft)] leading-relaxed line-clamp-2 max-w-2xl">
         {post.data.description}
       </p>
     </div>
 
-    <!-- Thumbnail Image -->
+    <!-- Thumbnail Image (Aspect 4/3 matching sdust) -->
     {post.data.cover && (
-      <div class="w-full md:w-56 h-36 shrink-0 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-800">
+      <div class="w-full h-40 md:h-32 shrink-0 rounded-lg overflow-hidden border border-[var(--line)] bg-[var(--paper-deep)]">
         <img
           src={post.data.cover}
           alt={post.data.coverAlt || post.data.title}

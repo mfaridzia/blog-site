@@ -11,7 +11,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-// Fetch all posts for search index
 const posts = await getCollection('blog', ({ data }) => {
   return !data.draft && data.lang === lang;
 });
@@ -30,24 +29,24 @@ const searchIndex = posts.map((post) => {
 
 <div
   id="search-modal"
-  class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-start justify-center pt-20 px-4 transition-opacity"
+  class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-xs flex items-start justify-center pt-20 px-4 transition-opacity"
   role="dialog"
   aria-modal="true"
   aria-label={t('search.placeholder')}
 >
   <div
-    class="w-full max-w-xl bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+    class="w-full max-w-xl bg-[var(--paper)] text-[var(--ink)] rounded-2xl border border-[var(--line)] shadow-2xl overflow-hidden"
     id="search-modal-container"
   >
     <!-- Search Input Header -->
-    <div class="flex items-center px-4 border-b border-slate-200 dark:border-slate-800">
-      <span class="text-slate-400 shrink-0 mr-3">
+    <div class="flex items-center px-4 border-b border-[var(--line)]">
+      <span class="text-[var(--muted)] shrink-0 mr-3">
         <Icon name="search" class="w-5 h-5" />
       </span>
       <input
         type="text"
         id="search-input"
-        class="w-full py-4 text-base bg-transparent text-slate-900 dark:text-white placeholder-slate-400 focus:outline-hidden"
+        class="w-full py-4 text-base bg-transparent text-[var(--ink)] placeholder-[var(--muted)] focus:outline-hidden"
         placeholder={t('search.placeholder')}
         autocomplete="off"
         spellcheck="false"
@@ -55,7 +54,7 @@ const searchIndex = posts.map((post) => {
       <button
         type="button"
         id="search-close-btn"
-        class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+        class="p-1.5 rounded-full text-[var(--muted)] hover:text-[var(--copper)] cursor-pointer"
         aria-label={t('search.close')}
       >
         <Icon name="close" class="w-4 h-4" />
@@ -63,17 +62,17 @@ const searchIndex = posts.map((post) => {
     </div>
 
     <!-- Search Results Container -->
-    <div id="search-results" class="max-h-80 overflow-y-auto p-2 divide-y divide-slate-100 dark:divide-slate-800/60">
+    <div id="search-results" class="max-h-80 overflow-y-auto p-2 divide-y divide-[var(--line)]/50">
       <!-- Dynamically populated -->
     </div>
 
     <!-- Modal Footer Helper -->
-    <div class="px-4 py-2.5 bg-slate-50 dark:bg-slate-900/40 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+    <div class="px-4 py-2.5 bg-[var(--paper-deep)] border-t border-[var(--line)] flex items-center justify-between text-[11px] text-[var(--muted)]">
       <div class="flex items-center gap-2">
-        <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 bg-white dark:bg-slate-800 rounded-sm border border-slate-200 dark:border-slate-700">↑</kbd><kbd class="px-1 py-0.5 bg-white dark:bg-slate-800 rounded-sm border border-slate-200 dark:border-slate-700">↓</kbd> Navigasi</span>
-        <span class="flex items-center gap-1"><kbd class="px-1 py-0.5 bg-white dark:bg-slate-800 rounded-sm border border-slate-200 dark:border-slate-700">↵</kbd> Buka</span>
+        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">↑</kbd><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">↓</kbd> Navigasi</span>
+        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">↵</kbd> Buka</span>
       </div>
-      <span><kbd class="px-1 py-0.5 bg-white dark:bg-slate-800 rounded-sm border border-slate-200 dark:border-slate-700">ESC</kbd> Tutup</span>
+      <span><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">ESC</kbd> Tutup</span>
     </div>
   </div>
 </div>
@@ -81,7 +80,6 @@ const searchIndex = posts.map((post) => {
 <script define:vars={{ searchIndex, noResultsText: t('search.noResults') }}>
   function setupSearch() {
     const modal = document.getElementById('search-modal');
-    const container = document.getElementById('search-modal-container');
     const input = document.getElementById('search-input');
     const resultsContainer = document.getElementById('search-results');
     const closeBtn = document.getElementById('search-close-btn');
@@ -108,7 +106,7 @@ const searchIndex = posts.map((post) => {
 
     function renderResults(items) {
       if (!items.length) {
-        resultsContainer.innerHTML = `<div class="p-6 text-center text-sm text-slate-500">${noResultsText}</div>`;
+        resultsContainer.innerHTML = `<div class="p-6 text-center text-sm text-[var(--muted)]">${noResultsText}</div>`;
         activeIndex = -1;
         return;
       }
@@ -118,21 +116,18 @@ const searchIndex = posts.map((post) => {
           (item, idx) => `
           <a
             href="${item.url}"
-            class="search-result-item flex items-start justify-between gap-3 p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors group cursor-pointer ${idx === activeIndex ? 'bg-slate-100 dark:bg-slate-800/80' : ''}"
+            class="search-result-item flex items-start justify-between gap-3 p-3 rounded-xl hover:bg-[var(--paper-deep)] transition-colors group cursor-pointer ${idx === activeIndex ? 'bg-[var(--paper-deep)]' : ''}"
             data-index="${idx}"
           >
             <div class="space-y-1 flex-1">
               <div class="flex items-center gap-2">
-                <span class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                <span class="text-sm font-semibold text-[var(--ink)] group-hover:text-[var(--copper)]">
                   ${item.title}
                 </span>
-                ${item.topics.length ? `<span class="text-[10px] px-1.5 py-0.5 rounded-sm bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium">${item.topics.join(', ')}</span>` : ''}
+                ${item.topics.length ? `<span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--line)] text-[var(--moss)] font-medium">${item.topics.join(', ')}</span>` : ''}
               </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">${item.description}</p>
+              <p class="text-xs text-[var(--ink-soft)] line-clamp-1">${item.description}</p>
             </div>
-            <span class="text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200 mt-1">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></svg>
-            </span>
           </a>
         `
         )
@@ -154,7 +149,6 @@ const searchIndex = posts.map((post) => {
       renderResults(filtered);
     });
 
-    // Keyboard shortcuts
     window.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
@@ -190,10 +184,10 @@ const searchIndex = posts.map((post) => {
     function updateActiveSelection(items) {
       items.forEach((el, idx) => {
         if (idx === activeIndex) {
-          el.classList.add('bg-slate-100', 'dark:bg-slate-800/80');
+          el.classList.add('bg-[var(--paper-deep)]');
           el.scrollIntoView({ block: 'nearest' });
         } else {
-          el.classList.remove('bg-slate-100', 'dark:bg-slate-800/80');
+          el.classList.remove('bg-[var(--paper-deep)]');
         }
       });
     }

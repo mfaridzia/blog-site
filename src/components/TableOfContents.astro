@@ -14,24 +14,24 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 ---
 
 {filteredHeadings.length > 0 && (
-  <nav class="toc-container sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto space-y-3 text-xs" aria-label="Table of contents">
-    <p class="font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+  <nav class="toc-container max-h-[calc(100vh-10rem)] overflow-y-auto space-y-3 text-xs" aria-label="Table of contents">
+    <p class="font-bold uppercase tracking-widest text-[var(--muted)] text-[11px]">
       {t('post.toc')}
     </p>
 
-    <ul class="space-y-2 border-l border-slate-200 dark:border-slate-800">
+    <ol class="space-y-2">
       {filteredHeadings.map((heading) => (
-        <li class:list={['toc-item', heading.depth === 3 ? 'pl-4' : 'pl-2.5']}>
+        <li class:list={['toc-item', heading.depth === 3 ? 'pl-3' : '']}>
           <a
             href={`#${heading.slug}`}
-            class="toc-link block py-0.5 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors line-clamp-1 border-l -ml-[1px] border-transparent hover:border-slate-400"
+            class="toc-link block py-0.5 text-[var(--ink-soft)] hover:text-[var(--copper)] transition-colors line-clamp-1 leading-normal"
             data-slug={heading.slug}
           >
             {heading.text}
           </a>
         </li>
       ))}
-    </ul>
+    </ol>
   </nav>
 )}
 
@@ -55,7 +55,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
       for (let i = 0; i < headingElements.length; i++) {
         const heading = headingElements[i];
-        if (heading.offsetTop - 120 <= scrollY) {
+        if (heading.offsetTop - 140 <= scrollY) {
           activeIndex = i;
         } else {
           break;
@@ -64,11 +64,11 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
       links.forEach((link, idx) => {
         if (idx === activeIndex) {
-          link.classList.add('text-blue-600', 'dark:text-blue-400', 'font-semibold', 'border-blue-600', 'dark:border-blue-400');
-          link.classList.remove('text-slate-600', 'dark:text-slate-400', 'border-transparent');
+          link.classList.add('text-[var(--moss)]', 'font-semibold');
+          link.classList.remove('text-[var(--ink-soft)]');
         } else {
-          link.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-semibold', 'border-blue-600', 'dark:border-blue-400');
-          link.classList.add('text-slate-600', 'dark:text-slate-400', 'border-transparent');
+          link.classList.remove('text-[var(--moss)]', 'font-semibold');
+          link.classList.add('text-[var(--ink-soft)]');
         }
       });
     }
