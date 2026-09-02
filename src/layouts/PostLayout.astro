@@ -105,14 +105,14 @@ const nextSlug = nextPost ? nextPost.id.replace(/^(id|en)\//, '').replace(/\.(md
     )}
 
     <!-- 2-Column Content Grid: Main Prose + Sticky TOC -->
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_220px] gap-8 lg:gap-14 pt-1 sm:pt-2 items-start min-w-0">
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_240px] gap-8 lg:gap-14 pt-1 sm:pt-2 items-start min-w-0">
       <!-- Article Prose -->
-      <div class="prose max-w-full min-w-0 overflow-hidden">
+      <div class="prose max-w-full min-w-0">
         <slot />
       </div>
 
       <!-- Sticky Table of Contents Sidebar -->
-      <aside class="hidden lg:block sticky top-28 self-start pl-4 border-l border-[var(--line)]">
+      <aside class="hidden lg:block sticky top-24 self-start pl-5 border-l border-[var(--line)] max-h-[calc(100vh-8rem)] overflow-y-auto">
         <TableOfContents headings={headings} lang={lang} />
       </aside>
     </div>
