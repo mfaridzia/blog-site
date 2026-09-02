@@ -43,6 +43,11 @@ const ogImage = new URL(image, Astro.site || siteConfig.siteUrl);
       rel="stylesheet"
     />
 
+    <!-- Favicon using User Photo -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
     <!-- Primary Meta Tags -->
     <title>{pageTitle}</title>
     <meta name="title" content={pageTitle} />
@@ -69,7 +74,7 @@ const ogImage = new URL(image, Astro.site || siteConfig.siteUrl);
       rel="alternate"
       type="application/rss+xml"
       title={siteConfig.title[lang]}
-      href={lang === 'id' ? '/rss.xml' : '/en/rss.xml'}
+      href={lang === 'id' ? '/id/rss.xml' : '/en/rss.xml'}
     />
 
     <!-- Anti-flicker Dark Mode Script -->

@@ -11,7 +11,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
-const rssUrl = lang === 'id' ? '/rss.xml' : '/en/rss.xml';
+const rssUrl = lang === 'id' ? '/id/rss.xml' : '/en/rss.xml';
 ---
 
 <footer class="w-full border-t border-[var(--line)] mt-auto py-10 text-xs text-[var(--muted)]">

@@ -10,16 +10,18 @@ export function getLangFromUrl(url: URL): Lang {
 
 export function useTranslations(lang: Lang) {
   return function t(key: keyof typeof ui[typeof defaultLang]): string {
-    return ui[lang][key] || ui[defaultLang][key];
+    return ui[lang]?.[key] || ui[defaultLang][key];
   };
 }
 
 export function formatUrl(path: string, lang: Lang): string {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  if (lang === defaultLang) {
-    return cleanPath;
+  const clean = path.replace(/^\/(en|id)(\/|$)/, '/');
+  const normalized = clean.startsWith('/') ? clean : `/${clean}`;
+  
+  if (lang === 'en') {
+    return `/en${normalized === '/' ? '' : normalized}`;
   }
-  return `/en${cleanPath === '/' ? '' : cleanPath}`;
+  return `/id${normalized === '/' ? '' : normalized}`;
 }
 
 export function formatDate(date: Date, lang: Lang): string {

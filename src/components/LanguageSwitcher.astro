@@ -8,32 +8,15 @@ interface Props {
 const { currentLang } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-let idPath = '/';
-let enPath = '/en';
+// Calculate target paths
+const stripped = currentPath.replace(/^\/(en|id)(\/|$)/, '/');
+const normalized = stripped.startsWith('/') ? stripped : `/${stripped}`;
 
-if (currentLang === 'id') {
-  idPath = currentPath;
-  enPath = currentPath === '/' ? '/en' : `/en${currentPath}`;
-} else {
-  enPath = currentPath;
-  const stripped = currentPath.replace(/^\/en/, '') || '/';
-  idPath = stripped;
-}
+const enPath = `/en${normalized === '/' ? '' : normalized}`;
+const idPath = `/id${normalized === '/' ? '' : normalized}`;
 ---
 
 <div class="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--card)] p-0.5 text-xs font-mono font-medium text-[var(--ink-soft)]">
-  <a
-    href={idPath}
-    class:list={[
-      'px-2.5 py-1 rounded-full transition-all',
-      currentLang === 'id'
-        ? 'bg-[var(--green)] text-white shadow-xs font-semibold'
-        : 'hover:text-[var(--green)]'
-    ]}
-    aria-label="Bahasa Indonesia"
-  >
-    ID
-  </a>
   <a
     href={enPath}
     class:list={[
@@ -45,5 +28,17 @@ if (currentLang === 'id') {
     aria-label="English"
   >
     EN
+  </a>
+  <a
+    href={idPath}
+    class:list={[
+      'px-2.5 py-1 rounded-full transition-all',
+      currentLang === 'id'
+        ? 'bg-[var(--green)] text-white shadow-xs font-semibold'
+        : 'hover:text-[var(--green)]'
+    ]}
+    aria-label="Bahasa Indonesia"
+  >
+    ID
   </a>
 </div>

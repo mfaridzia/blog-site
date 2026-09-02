@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import TopicFilter from '../../components/TopicFilter.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const lang = 'id';
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return !data.draft && data.lang === lang;
+});
+
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featuredPost = allPosts.find((p) => p.data.featured) || allPosts[0];
+---
+
+<BaseLayout lang={lang}>
+  <div class="space-y-10">
+    <Hero lang={lang} featuredPost={featuredPost} />
+
+    <section class="space-y-6 pt-4">
+      <TopicFilter lang={lang} totalPosts={allPosts.length} />
+
+      <div class="space-y-1">
+        {allPosts.map((post) => (
+          <PostCard post={post} lang={lang} />
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
