@@ -25,22 +25,22 @@ const topicsData = post.data.topics.map(t => t.toLowerCase()).join(',');
   >
     <!-- Post Text Content -->
     <div class="space-y-2">
-      <div class="flex items-center gap-2 text-xs text-[var(--muted)]">
+      <div class="flex items-center gap-2 font-mono text-xs text-[var(--muted)]">
         <time datetime={post.data.pubDate.toISOString()}>
           {formatDate(post.data.pubDate, lang)}
         </time>
         {topicsString && (
           <>
             <span>•</span>
-            <span class="font-medium text-[var(--moss)]">
+            <span class="font-medium text-[var(--green)]">
               {topicsString}
             </span>
           </>
         )}
       </div>
 
-      <!-- Title (Serif Display) -->
-      <h3 class="font-display text-2xl sm:text-3xl font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--copper)] transition-colors leading-snug">
+      <!-- Title (Playfair Display) -->
+      <h3 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[var(--ink)] group-hover:text-[var(--green)] transition-colors leading-snug">
         {post.data.title}
       </h3>
 
@@ -50,7 +50,7 @@ const topicsData = post.data.topics.map(t => t.toLowerCase()).join(',');
       </p>
     </div>
 
-    <!-- Thumbnail Image (Aspect 4/3 matching sdust) -->
+    <!-- Thumbnail Image -->
     {post.data.cover && (
       <div class="w-full h-40 md:h-32 shrink-0 rounded-lg overflow-hidden border border-[var(--line)] bg-[var(--paper-deep)]">
         <img

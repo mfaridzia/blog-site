@@ -29,13 +29,13 @@ const searchIndex = posts.map((post) => {
 
 <div
   id="search-modal"
-  class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-xs flex items-start justify-center pt-20 px-4 transition-opacity"
+  class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-start justify-center pt-20 px-4 transition-opacity"
   role="dialog"
   aria-modal="true"
   aria-label={t('search.placeholder')}
 >
   <div
-    class="w-full max-w-xl bg-[var(--paper)] text-[var(--ink)] rounded-2xl border border-[var(--line)] shadow-2xl overflow-hidden"
+    class="w-full max-w-xl bg-[var(--card)] text-[var(--ink)] rounded-lg border border-[var(--line)] shadow-2xl overflow-hidden"
     id="search-modal-container"
   >
     <!-- Search Input Header -->
@@ -54,7 +54,7 @@ const searchIndex = posts.map((post) => {
       <button
         type="button"
         id="search-close-btn"
-        class="p-1.5 rounded-full text-[var(--muted)] hover:text-[var(--copper)] cursor-pointer"
+        class="p-1.5 rounded-full text-[var(--muted)] hover:text-[var(--green)] cursor-pointer"
         aria-label={t('search.close')}
       >
         <Icon name="close" class="w-4 h-4" />
@@ -67,12 +67,12 @@ const searchIndex = posts.map((post) => {
     </div>
 
     <!-- Modal Footer Helper -->
-    <div class="px-4 py-2.5 bg-[var(--paper-deep)] border-t border-[var(--line)] flex items-center justify-between text-[11px] text-[var(--muted)]">
+    <div class="px-4 py-2.5 bg-[var(--paper-deep)] border-t border-[var(--line)] flex items-center justify-between font-mono text-[11px] text-[var(--muted)]">
       <div class="flex items-center gap-2">
-        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">↑</kbd><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">↓</kbd> Navigasi</span>
-        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">↵</kbd> Buka</span>
+        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↑</kbd><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↓</kbd> Navigasi</span>
+        <span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">↵</kbd> Buka</span>
       </div>
-      <span><kbd class="px-1.5 py-0.5 bg-[var(--paper)] rounded-sm border border-[var(--line)]">ESC</kbd> Tutup</span>
+      <span><kbd class="px-1.5 py-0.5 bg-[var(--card)] rounded-sm border border-[var(--line)]">ESC</kbd> Tutup</span>
     </div>
   </div>
 </div>
@@ -106,7 +106,7 @@ const searchIndex = posts.map((post) => {
 
     function renderResults(items) {
       if (!items.length) {
-        resultsContainer.innerHTML = `<div class="p-6 text-center text-sm text-[var(--muted)]">${noResultsText}</div>`;
+        resultsContainer.innerHTML = `<div class="p-6 text-center font-mono text-sm text-[var(--muted)]">${noResultsText}</div>`;
         activeIndex = -1;
         return;
       }
@@ -116,15 +116,15 @@ const searchIndex = posts.map((post) => {
           (item, idx) => `
           <a
             href="${item.url}"
-            class="search-result-item flex items-start justify-between gap-3 p-3 rounded-xl hover:bg-[var(--paper-deep)] transition-colors group cursor-pointer ${idx === activeIndex ? 'bg-[var(--paper-deep)]' : ''}"
+            class="search-result-item flex items-start justify-between gap-3 p-3 rounded-lg hover:bg-[var(--paper-deep)] transition-colors group cursor-pointer ${idx === activeIndex ? 'bg-[var(--paper-deep)]' : ''}"
             data-index="${idx}"
           >
             <div class="space-y-1 flex-1">
               <div class="flex items-center gap-2">
-                <span class="text-sm font-semibold text-[var(--ink)] group-hover:text-[var(--copper)]">
+                <span class="text-sm font-semibold text-[var(--ink)] group-hover:text-[var(--green)]">
                   ${item.title}
                 </span>
-                ${item.topics.length ? `<span class="text-[10px] px-2 py-0.5 rounded-full border border-[var(--line)] text-[var(--moss)] font-medium">${item.topics.join(', ')}</span>` : ''}
+                ${item.topics.length ? `<span class="font-mono text-[10px] px-2 py-0.5 rounded-full border border-[var(--line)] bg-[var(--card)] text-[var(--green)] font-medium">${item.topics.join(', ')}</span>` : ''}
               </div>
               <p class="text-xs text-[var(--ink-soft)] line-clamp-1">${item.description}</p>
             </div>

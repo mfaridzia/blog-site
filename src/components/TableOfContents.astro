@@ -15,7 +15,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
 {filteredHeadings.length > 0 && (
   <nav class="toc-container max-h-[calc(100vh-10rem)] overflow-y-auto space-y-3 text-xs" aria-label="Table of contents">
-    <p class="font-bold uppercase tracking-widest text-[var(--muted)] text-[11px]">
+    <p class="font-mono font-bold uppercase tracking-widest text-[var(--green)] text-[11px]">
       {t('post.toc')}
     </p>
 
@@ -24,7 +24,7 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
         <li class:list={['toc-item', heading.depth === 3 ? 'pl-3' : '']}>
           <a
             href={`#${heading.slug}`}
-            class="toc-link block py-0.5 text-[var(--ink-soft)] hover:text-[var(--copper)] transition-colors line-clamp-1 leading-normal"
+            class="toc-link block py-0.5 text-[var(--ink-soft)] hover:text-[var(--green)] transition-colors line-clamp-1 leading-normal"
             data-slug={heading.slug}
           >
             {heading.text}
@@ -64,10 +64,10 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
       links.forEach((link, idx) => {
         if (idx === activeIndex) {
-          link.classList.add('text-[var(--moss)]', 'font-semibold');
+          link.classList.add('text-[var(--green)]', 'font-semibold');
           link.classList.remove('text-[var(--ink-soft)]');
         } else {
-          link.classList.remove('text-[var(--moss)]', 'font-semibold');
+          link.classList.remove('text-[var(--green)]', 'font-semibold');
           link.classList.add('text-[var(--ink-soft)]');
         }
       });

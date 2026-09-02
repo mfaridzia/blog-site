@@ -5,17 +5,17 @@ import Icon from './Icon.astro';
 <button
   id="theme-toggle"
   type="button"
-  class="inline-flex items-center justify-center min-w-9 min-h-9 px-3 rounded-full text-[var(--ink-soft)] hover:text-[var(--copper)] border border-[var(--line)] hover:border-[var(--copper)] transition-colors cursor-pointer text-xs font-medium"
+  class="inline-flex items-center justify-center min-w-9 min-h-9 px-3 rounded-full text-[var(--ink-soft)] hover:text-[var(--green)] border border-[var(--line)] hover:border-[var(--green)] bg-[var(--card)] transition-colors cursor-pointer text-xs font-medium font-mono"
   aria-label="Toggle theme"
   title="Toggle theme"
 >
   <span class="hidden dark:inline-flex items-center gap-1.5">
     <Icon name="sun" class="w-3.5 h-3.5" />
-    <span>Light</span>
+    <span>LIGHT</span>
   </span>
   <span class="inline-flex dark:hidden items-center gap-1.5">
     <Icon name="moon" class="w-3.5 h-3.5" />
-    <span>Dark</span>
+    <span>DARK</span>
   </span>
 </button>
 

@@ -14,15 +14,15 @@ const t = useTranslations(lang);
 
 <div class="space-y-6 pt-10 border-t border-[var(--line)]">
   <div class="flex flex-wrap items-end justify-between gap-4">
-    <h2 id="archive" class="font-display text-3xl sm:text-4xl md:text-5xl font-medium text-[var(--ink)] tracking-tight scroll-mt-24">
+    <h2 id="archive" class="font-display text-3xl sm:text-4xl font-bold text-[var(--ink)] tracking-tight scroll-mt-24">
       {t('archive.title')}
     </h2>
-    <span id="posts-count-label" class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+    <span id="posts-count-label" class="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
       {totalPosts} {t('archive.postsCount')}
     </span>
   </div>
 
-  <!-- Topic Pills matching sdust.dev -->
+  <!-- Topic Pills matching labs.muhfaridzia.live segmented chips -->
   <div
     class="flex flex-wrap items-center gap-2 pb-2 overflow-x-auto"
     role="radiogroup"
@@ -35,8 +35,8 @@ const t = useTranslations(lang);
         class:list={[
           'topic-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer border',
           index === 0
-            ? 'active-topic bg-[var(--moss-surface)] text-[var(--on-moss)] border-[var(--moss-surface)] shadow-xs font-semibold'
-            : 'bg-transparent text-[var(--ink-soft)] border-[var(--line)] hover:text-[var(--ink)] hover:border-[var(--copper)]'
+            ? 'active-topic bg-[var(--green)] text-white border-[var(--green)] shadow-xs font-semibold'
+            : 'bg-[var(--card)] text-[var(--muted)] border-[var(--line)] hover:text-[var(--ink)] hover:border-[var(--green)]'
         ]}
       >
         {topic.label[lang]}
@@ -58,9 +58,9 @@ const t = useTranslations(lang);
       buttons.forEach((btn) => {
         const isSelected = btn.dataset.topic === selectedTopic;
         if (isSelected) {
-          btn.className = 'topic-btn active-topic px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-[var(--moss-surface)] text-[var(--on-moss)] border border-[var(--moss-surface)] shadow-xs cursor-pointer';
+          btn.className = 'topic-btn active-topic px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-[var(--green)] text-white border border-[var(--green)] shadow-xs cursor-pointer';
         } else {
-          btn.className = 'topic-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all bg-transparent text-[var(--ink-soft)] border border-[var(--line)] hover:text-[var(--ink)] hover:border-[var(--copper)] cursor-pointer';
+          btn.className = 'topic-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all bg-[var(--card)] text-[var(--muted)] border border-[var(--line)] hover:text-[var(--ink)] hover:border-[var(--green)] cursor-pointer';
         }
       });
 

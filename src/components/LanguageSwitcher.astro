@@ -21,14 +21,14 @@ if (currentLang === 'id') {
 }
 ---
 
-<div class="inline-flex items-center rounded-full border border-[var(--line)] p-0.5 text-xs font-medium text-[var(--ink-soft)]">
+<div class="inline-flex items-center rounded-full border border-[var(--line)] bg-[var(--card)] p-0.5 text-xs font-mono font-medium text-[var(--ink-soft)]">
   <a
     href={idPath}
     class:list={[
       'px-2.5 py-1 rounded-full transition-all',
       currentLang === 'id'
-        ? 'bg-[var(--moss-surface)] text-[var(--on-moss)] shadow-xs font-semibold'
-        : 'hover:text-[var(--copper)]'
+        ? 'bg-[var(--green)] text-white shadow-xs font-semibold'
+        : 'hover:text-[var(--green)]'
     ]}
     aria-label="Bahasa Indonesia"
   >
@@ -39,8 +39,8 @@ if (currentLang === 'id') {
     class:list={[
       'px-2.5 py-1 rounded-full transition-all',
       currentLang === 'en'
-        ? 'bg-[var(--moss-surface)] text-[var(--on-moss)] shadow-xs font-semibold'
-        : 'hover:text-[var(--copper)]'
+        ? 'bg-[var(--green)] text-white shadow-xs font-semibold'
+        : 'hover:text-[var(--green)]'
     ]}
     aria-label="English"
   >

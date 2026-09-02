@@ -18,10 +18,10 @@ const aboutUrl = formatUrl('/about', lang);
 const rssUrl = lang === 'id' ? '/rss.xml' : '/en/rss.xml';
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-[var(--line)] bg-[var(--paper)]/90 backdrop-blur-md transition-colors">
+<header class="sticky top-0 z-40 w-full border-b border-[var(--line)] bg-[var(--paper)]/95 backdrop-blur-md transition-colors">
   <div class="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8 h-18 flex items-center justify-between">
-    <!-- Brand -->
-    <a href={formatUrl('/', lang)} class="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-[var(--copper)] rounded-lg">
+    <!-- Brand matching labs.muhfaridzia.live -->
+    <a href={formatUrl('/', lang)} class="flex items-center gap-3 group focus-visible:outline-2 focus-visible:outline-[var(--green)] rounded-lg">
       <img
         src={siteConfig.avatar}
         alt={siteConfig.author}
@@ -29,20 +29,20 @@ const rssUrl = lang === 'id' ? '/rss.xml' : '/en/rss.xml';
         width="40"
         height="40"
       />
-      <span class="font-bold text-[var(--ink)] tracking-tight text-base group-hover:text-[var(--copper)] transition-colors">
+      <span class="font-semibold text-[var(--ink)] tracking-tight text-lg group-hover:text-[var(--green)] transition-colors">
         {title}
       </span>
     </a>
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[var(--ink-soft)]">
-      <a href={archiveUrl} class="hover:text-[var(--copper)] transition-colors">
+      <a href={archiveUrl} class="hover:text-[var(--green)] transition-colors">
         {t('nav.archive')}
       </a>
-      <a href={aboutUrl} class="hover:text-[var(--copper)] transition-colors">
+      <a href={aboutUrl} class="hover:text-[var(--green)] transition-colors">
         {t('nav.about')}
       </a>
-      <a href={rssUrl} target="_blank" class="hover:text-[var(--copper)] transition-colors flex items-center gap-1.5" title="RSS Feed">
+      <a href={rssUrl} target="_blank" class="hover:text-[var(--green)] transition-colors flex items-center gap-1.5" title="RSS Feed">
         <Icon name="rss" class="w-3.5 h-3.5" />
         <span>{t('nav.rss')}</span>
       </a>
@@ -51,7 +51,7 @@ const rssUrl = lang === 'id' ? '/rss.xml' : '/en/rss.xml';
       <button
         type="button"
         id="search-trigger-btn"
-        class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--line)] text-xs text-[var(--muted)] hover:text-[var(--ink)] hover:border-[var(--copper)] transition-colors cursor-pointer"
+        class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--line)] text-xs text-[var(--muted)] hover:text-[var(--ink)] hover:border-[var(--green)] bg-[var(--card)] transition-colors cursor-pointer"
         aria-label={t('search.button')}
       >
         <Icon name="search" class="w-3.5 h-3.5" />
@@ -71,7 +71,7 @@ const rssUrl = lang === 'id' ? '/rss.xml' : '/en/rss.xml';
       <button
         type="button"
         id="search-trigger-mobile"
-        class="p-2 rounded-full text-[var(--ink-soft)] hover:text-[var(--copper)] border border-[var(--line)] cursor-pointer"
+        class="p-2 rounded-full text-[var(--ink-soft)] hover:text-[var(--green)] border border-[var(--line)] bg-[var(--card)] cursor-pointer"
         aria-label={t('search.button')}
       >
         <Icon name="search" class="w-4 h-4" />
@@ -81,7 +81,7 @@ const rssUrl = lang === 'id' ? '/rss.xml' : '/en/rss.xml';
       <button
         type="button"
         id="mobile-menu-btn"
-        class="p-2 rounded-full text-[var(--ink-soft)] hover:text-[var(--copper)] border border-[var(--line)] cursor-pointer"
+        class="p-2 rounded-full text-[var(--ink-soft)] hover:text-[var(--green)] border border-[var(--line)] bg-[var(--card)] cursor-pointer"
         aria-label="Toggle navigation menu"
         aria-expanded="false"
       >
@@ -97,13 +97,13 @@ const rssUrl = lang === 'id' ? '/rss.xml' : '/en/rss.xml';
 
   <!-- Mobile Dropdown Menu -->
   <div id="mobile-menu" class="hidden md:hidden border-b border-[var(--line)] bg-[var(--paper)] px-6 py-4 space-y-3 text-sm font-medium">
-    <a href={archiveUrl} class="block py-1.5 text-[var(--ink-soft)] hover:text-[var(--copper)]">
+    <a href={archiveUrl} class="block py-1.5 text-[var(--ink-soft)] hover:text-[var(--green)]">
       {t('nav.archive')}
     </a>
-    <a href={aboutUrl} class="block py-1.5 text-[var(--ink-soft)] hover:text-[var(--copper)]">
+    <a href={aboutUrl} class="block py-1.5 text-[var(--ink-soft)] hover:text-[var(--green)]">
       {t('nav.about')}
     </a>
-    <a href={rssUrl} target="_blank" class="flex items-center gap-2 py-1.5 text-[var(--ink-soft)] hover:text-[var(--copper)]">
+    <a href={rssUrl} target="_blank" class="flex items-center gap-2 py-1.5 text-[var(--ink-soft)] hover:text-[var(--green)]">
       <Icon name="rss" class="w-4 h-4" />
       <span>{t('nav.rss')} Feed</span>
     </a>
