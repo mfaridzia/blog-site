@@ -35,7 +35,7 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   author: "Muhammad Farid Zia",
   avatar: "https://avatars.githubusercontent.com/u/13011170",
-  siteUrl: "https://muhfaridzia.dev",
+  siteUrl: "https://blog.muhfaridzia.live",
   title: {
     id: "Blog by Muhammad Farid Zia",
     en: "Blog by Muhammad Farid Zia",
