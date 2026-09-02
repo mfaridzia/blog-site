@@ -1,31 +1,32 @@
-# Blog Personal - Muh Farid Zia
+# Personal Blog - Muhammad Farid Zia
 
-Blog personal modern dan ultra-cepat yang dibangun dengan **Astro 5+**, **Tailwind CSS v4**, dan **Content Collections**, terinspirasi dari desain minimalis dan editorial [sdust.dev](https://sdust.dev/).
-
----
-
-## ✨ Fitur Utama
-
-- 🌐 **Dukungan Penuh i18n (ID & EN)**: Bahasa Indonesia default di root (`/`) dan English di (`/en/`), lengkap dengan switcher bahasa dinamis di header.
-- 🌓 **Dark / Light Mode**: Deteksi preferensi sistem dan persistensi `localStorage` tanpa efek flicker saat reload.
-- ⚡ **Zero-JS by Default**: Kecepatan load instan dan skor Lighthouse optimal.
-- 🏷️ **Filter Topik Instan**: Filter artikel di homepage berdasarkan tag (*All, Web, AI, Frontend, Debugging, Career*) secara interaktif tanpa reload halaman.
-- 📑 **Sticky Table of Contents (TOC)**: Navigasi daftar isi artikel dengan scrollspy aktif untuk highlight posisi scroll pengguna secara *real-time*.
-- 🔍 **Pencarian Instan (Cmd+K / Ctrl+K)**: Modal pencarian artikel cepat dengan navigasi keyboard (`↑`, `↓`, `Enter`, `Esc`).
-- 📋 **Copy Code Snippet**: Tombol salin kode otomatis pada setiap blok kode Markdown dengan indikator visual.
-- 🎨 **Shiki Syntax Highlighting**: Pewarnaan kode otomatis yang menyesuaikan tema terang/gelap.
-- 📡 **RSS & SEO Ready**: Auto-generated RSS feeds (`/rss.xml` & `/en/rss.xml`), Sitemap (`/sitemap-index.xml`), dan OpenGraph/Twitter Cards untuk share media sosial.
-- ⚙️ **Konfigurasi Terpusat**: Semua identitas penulis, avatar, bio, link sosial, dan topik diatur dalam satu file `src/config/site.config.ts`.
+A minimal, ultra-fast personal blog and technical journal built with **Astro 5+**, **Tailwind CSS v4**, and **Content Collections**.
 
 ---
 
-## 📁 Struktur Folder
+## ✨ Key Features
+
+- 🌐 **Native Bilingual i18n (EN / ID)**: English is the default language at root (`/en`), with Indonesian available at (`/id`), complete with an instant route-preserving language switcher in the header.
+- 🌓 **Dark / Light Mode**: Automatically detects OS preference with zero-flicker `localStorage` persistence.
+- ⚡ **Zero Client-Side JS by Default**: Compiled directly to static HTML and CSS for lightning-fast performance and optimal Core Web Vitals.
+- 🏷️ **Instant Topic Filtering**: Filter articles on the homepage by topic (*Web, AI, Frontend, Debugging, Career*) in real time without page reloads.
+- 📑 **Sticky Table of Contents (TOC)**: Automatically indexes H2 and H3 headings and highlights active reading position with scrollspy.
+- 🔍 **Instant Search (Cmd+K / Ctrl+K)**: Client-side fuzzy search modal across titles, descriptions, and topics with keyboard navigation (`↑`, `↓`, `Enter`, `Esc`).
+- 📋 **Copy Code Snippet**: Instant copy buttons on all code blocks with Shiki syntax highlighting synced to light/dark themes.
+- 📡 **RSS & SEO Ready**: Auto-generated RSS feeds ([`/en/rss.xml`](/en/rss.xml) & [`/id/rss.xml`](/id/rss.xml)), Sitemap (`/sitemap-index.xml`), and OpenGraph / Twitter Card meta tags.
+- ⚙️ **Centralized Configuration**: All site metadata, author profiles, avatar, social links, and topics are managed in [`src/config/site.config.ts`](src/config/site.config.ts).
+
+---
+
+## 📁 Project Structure
 
 ```text
 blog/
 ├── public/
+│   ├── favicon.ico
+│   ├── favicon.png
+│   ├── favicon.svg
 │   └── images/
-│       ├── avatar.svg
 │       └── avatar.jpg
 ├── src/
 │   ├── components/
@@ -41,89 +42,97 @@ blog/
 │   │   ├── ThemeToggle.astro
 │   │   └── TopicFilter.astro
 │   ├── config/
-│   │   └── site.config.ts          # Pengaturan identitas & profil
+│   │   └── site.config.ts          # Central author & site configuration
 │   ├── content/
 │   │   └── blog/
-│   │       ├── id/                 # Artikel Bahasa Indonesia (.md / .mdx)
-│   │       └── en/                 # Artikel English (.md / .mdx)
-│   ├── content.config.ts           # Schema validasi Content Collections
+│   │       ├── en/                 # English articles (.md / .mdx)
+│   │       └── id/                 # Indonesian articles (.md / .mdx)
+│   ├── content.config.ts           # Zod schema for Content Collections
 │   ├── i18n/
-│   │   ├── ui.ts                   # Kamus teks UI ID & EN
-│   │   └── utils.ts                # Helper i18n & routing
+│   │   ├── ui.ts                   # UI strings dictionary (EN / ID)
+│   │   └── utils.ts                # i18n routing & translation helpers
 │   ├── layouts/
 │   │   ├── BaseLayout.astro
 │   │   └── PostLayout.astro
 │   ├── pages/
-│   │   ├── index.astro             # Home ID
-│   │   ├── about.astro             # About ID
-│   │   ├── rss.xml.ts              # RSS Feed ID
-│   │   ├── posts/[slug].astro      # Post Detail ID
-│   │   └── en/
-│   │       ├── index.astro         # Home EN
-│   │       ├── about.astro         # About EN
-│   │       ├── rss.xml.ts          # RSS Feed EN
-│   │       └── posts/[slug].astro  # Post Detail EN
+│   │   ├── index.astro             # Root redirect to /en
+│   │   ├── rss.xml.ts              # Root RSS feed
+│   │   ├── en/
+│   │   │   ├── index.astro         # English Home
+│   │   │   ├── about.astro         # English About
+│   │   │   ├── rss.xml.ts          # English RSS
+│   │   │   └── posts/[slug].astro  # English Post Detail
+│   │   └── id/
+│   │       ├── index.astro         # Indonesian Home
+│   │       ├── about.astro         # Indonesian About
+│   │       ├── rss.xml.ts          # Indonesian RSS
+│   │       └── posts/[slug].astro  # Indonesian Post Detail
 │   └── styles/
-│       └── global.css              # Tailwind v4 & Shiki styles
+│       └── global.css              # Tailwind v4, custom theme variables, Shiki styles
 ├── astro.config.mjs
 └── package.json
 ```
 
 ---
 
-## 🚀 Memulai Proyek (Getting Started)
+## 🚀 Getting Started
 
-### 1. Jalankan Development Server
+### 1. Install Dependencies
+```bash
+pnpm install
+```
+
+### 2. Start Development Server
 ```bash
 pnpm dev
 ```
-Buka browser di `http://localhost:4321`.
+Open [http://localhost:4321](http://localhost:4321) in your browser.
 
-### 2. Build untuk Production
+### 3. Build for Production
 ```bash
 pnpm build
 ```
 
-### 3. Preview Hasil Build Lokal
+### 4. Preview Production Build
 ```bash
 pnpm preview
 ```
 
 ---
 
-## ✍️ Cara Menambah Artikel Baru
+## ✍️ Adding a New Post
 
-1. Untuk artikel **Bahasa Indonesia**, buat file baru di `src/content/blog/id/nama-artikel.md` (atau `.mdx`).
-2. Untuk artikel **English**, buat file baru di `src/content/blog/en/post-title.md` (atau `.mdx`).
+1. For **English**, create a new file in `src/content/blog/en/your-post-slug.md` (or `.mdx`).
+2. For **Indonesian**, create a new file in `src/content/blog/id/your-post-slug.md` (or `.mdx`).
 
-### Format Frontmatter:
+### Frontmatter Schema:
 ```markdown
 ---
-title: "Judul Artikel Anda"
-description: "Deskripsi singkat 1-2 kalimat untuk preview dan meta tag SEO."
+title: "Your Article Title"
+description: "A concise 1-2 sentence description for previews and SEO meta tags."
 pubDate: 2026-09-02
-cover: "https://images.unsplash.com/..." # opsional
-coverAlt: "Deskripsi alternatif gambar" # opsional
-topics: ["Web", "AI"]
-featured: false # set true jika ingin dijadikan banner utama di homepage
-readingTime: "5 min read" # opsional
-lang: "id" # gunakan "id" atau "en"
+cover: "https://images.unsplash.com/..." # optional
+coverAlt: "Image alternative text" # optional
+topics: ["Web", "Frontend"]
+featured: false # set to true to feature on the homepage banner
+readingTime: "5 min read" # optional
+lang: "en" # "en" or "id"
 ---
 
-Tulis konten artikel Anda di sini dengan format Markdown atau MDX biasa...
+Write your article content here in standard Markdown or MDX...
 
-## Heading 2 (Akan otomatis masuk ke Table of Contents)
+## Heading 2 (Automatically indexed in the Table of Contents)
 
-Konten paragraf...
+Paragraph content...
 ```
 
 ---
 
-## 🛠️ Kustomisasi Profil & Media Sosial
+## 🛠️ Customization
 
-Edit file [`src/config/site.config.ts`](file:///Users/muhfaridzia/Documents/personal/blog/src/config/site.config.ts) untuk mengubah:
-- Nama Penulis
-- Judul & Tagline Blog (ID & EN)
-- Bio Lede (ID & EN)
-- Link Sosial Media (GitHub, LinkedIn, X, Email)
-- Daftar Kategori Topik
+Edit [`src/config/site.config.ts`](src/config/site.config.ts) to update:
+- Author Name
+- Blog Titles & Taglines (EN & ID)
+- Bio & Lede descriptions
+- Social Media Profiles (GitHub, LinkedIn, X, Email)
+- Topic Categories
